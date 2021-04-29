@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+
+.white-background {
+  background-color: white;
+}
+
+.dark-background {
+  background-color: grey;
+}
+
+#cell-day {
+  text-align: end;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+#cell-day-td {
+  height: 8rem;
+}
+
+#appointment-btn {
+  padding: 0;
+  margin-left: -25%;
+  font-size: 0.65rem;
+
+}
+
+#modal-close-btn {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+#clear-data-btn {
+  display: block;
+  margin-top: 2rem;
+}
+
+#header {
+  margin-top: 3rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#cell-day-event-grp {
+  list-style-type: none;
+}
+
+table {
+  table-layout: fixed;
+}

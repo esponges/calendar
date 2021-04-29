@@ -1,9 +1,11 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, getByRole, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Calendar from "../components/Calendar";
 
 beforeEach(() => {
-  render(<Calendar />);
+  render(
+    <Calendar />
+  );
 });
 
 afterEach(cleanup);
@@ -35,6 +37,18 @@ describe("Calendar", () => {
     waitFor(() => {
       const heading = screen.getAllByRole("heading", { name: /may 2021/i });
       expect(heading).toBeInTheDocument();
+    });
+  });
+
+  it('renders all the day grid', () => {
+    const todayValue = new Date().getDay();
+    const actualMonthValue = new Date().getMonth() + 1;
+    const actualYear = new Date().getFullYear();
+    render(<Calendar today={todayValue} month={actualMonthValue} year={actualYear} />);
+    waitFor(() => {
+      const number = Math.floor((Math.random() * 28) + 1);
+      const DayCell = getByRole('paragraph', { name: `${number}`});
+      expect(DayCell).toBeInTheDocument();
     });
   });
 });

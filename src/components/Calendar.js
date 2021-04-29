@@ -39,46 +39,28 @@ const Calendar = () => {
 
   const prepareData = (data) => {
     const storedData = JSON.parse(window.localStorage.getItem("appointments"));
-    console.log("is stored Data", storedData, "and dataaa ", data);
-    // return console.log(storedData);
     let newData = [];
     if (storedData === undefined || !storedData) {
-      console.log("it is undefined!!");
       newData = JSON.stringify([data]);
       return newData;
     } else {
-      console.log("it is defined");
       newData = [...storedData, data];
       const parsedNewData = JSON.stringify(newData);
       return parsedNewData;
     }
-    // return console.log(newData);
-    // const unparsedNewData =
-    //   decodedStoredData === undefined
-    //     ? [data]
-    //     : [decodedStoredData, data];
-    // const encodedNewData = JSON.stringify(unparsedNewData);
-    // return newData;
   };
 
   const clearLocalStorageData = () => {
-      console.log('clear data!!');
       window.localStorage.removeItem("appointments");
       window.location.reload();
   }
   
 
   const saveAppointment = (data) => {
-    data.month = month.name;
     try {
       notify("success");
-    //   console.log("saving appointment with next data ", data);
       const encodedNewData = prepareData(data);
-      //   console.log('encoded data new data is ', encodedNewData);
-      // //   return console.log(encodedNewData)
-    //   console.log("save data now!!");
       window.localStorage.setItem("appointments", encodedNewData);
-      console.log("save next local storage data", JSON.parse(encodedNewData));
       setAppointments(JSON.parse(encodedNewData));
     } catch (error) {
       console.error(error);
@@ -104,7 +86,6 @@ const Calendar = () => {
   const filterMonthNames = (monthValue) => {
     const realMonthValue = monthValue - 1;
     const monthName = monthNames[realMonthValue].month;
-    // const filteredMonth = monthNames.filter((m) => m.index === month.value);
     return monthName;
   };
 
@@ -112,7 +93,6 @@ const Calendar = () => {
     e.preventDefault();
     let newYear = year;
     let newMonth = action === "next" ? month.value + 1 : month.value - 1;
-    // console.log(`get ${action} month which is ${newMonth}`);
     if (newMonth > 12 || newMonth < 1) {
       if (newMonth > 12) {
         newYear = year + 1;
@@ -144,13 +124,11 @@ const Calendar = () => {
       ...month,
       name: filterMonthNames(month.value),
     });
-    // console.log("first user Effect!!!");
   }, []);
 
   useEffect(() => {
     const monthData = getCalendar(today, month.value, year);
     setDisplayDays(monthData);
-    // console.log("use Effect from calendar, change month or appoi");
     setAppointments(JSON.parse(window.localStorage.getItem("appointments")));
   }, [month]);
 
@@ -164,7 +142,7 @@ const Calendar = () => {
           year: year,
         }}
       >
-        <ToastContainer position="top-center" />
+        <ToastContainer position="top-right" />
         <DayCellModal
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
@@ -193,52 +171,6 @@ const Calendar = () => {
       >
         Log data
       </Button>
-      {/* <Button
-        id="clear-data-btn"
-        variant="secondary"
-        size="sm"
-        onClick={(e) =>
-          window.localStorage.setItem(
-            "appointments",
-            JSON.stringify([
-              {
-                details: "",
-                day: 6,
-                month: "June",
-                year: 2021,
-              },
-              {
-                details: "",
-                day: 6,
-                month: "June",
-                year: 2021,
-              },
-            ])
-          )
-        }
-      >
-        set dummy data 2 objects
-      </Button>
-      <Button
-        id="clear-data-btn"
-        variant="secondary"
-        size="sm"
-        onClick={(e) =>
-          window.localStorage.setItem(
-            "appointments",
-            JSON.stringify([
-              {
-                details: "",
-                day: 6,
-                month: "June",
-                year: 2021,
-              },
-            ])
-          )
-        }
-      >
-        set dummy data 1 object
-      </Button> */}
     </div>
   );
 };

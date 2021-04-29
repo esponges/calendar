@@ -15,12 +15,10 @@ const DayCell = ({ dayData }) => {
   };
 
   useEffect(() => {
-    //   console.log('day isss ', day, ' and month name is ', monthName, 'apoi are', appointments);
     if (appointments) {
       const filteredAppointments = appointments.filter(
         (ap) => ap.day === day && ap.month === monthName && ap.year === year
       );
-      //   filteredAppointments.length > 0 && console.log('and apoi filtered are ', filteredAppointments);
       setTodayAppointments(filteredAppointments);
     }
   }, []);
@@ -32,14 +30,6 @@ const DayCell = ({ dayData }) => {
       key={uuidv4()}
       className={actualMonth ? "white-background" : "dark-background"}
     >
-      {/* {day === 13 &&
-        console.log(
-          appointments,
-          monthName,
-          actualMonth,
-          "todays appointmens ",
-          todayAppointments
-        )} */}
       <p id="cell-day">{day}</p>
       <ul id="cell-day-event-grp">
         {todayAppointments.length > 0 &&

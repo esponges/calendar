@@ -10,7 +10,3 @@ const months =  monthNames.map((month, index) => {
 });
 
 module.exports = months;
-
-// let x = false;
-
-// console.log(x ?? 'true?!');

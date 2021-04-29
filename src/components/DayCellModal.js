@@ -27,21 +27,16 @@ const DayCellModal = ({
   const { day, month, year } = dayCellData;
 
   const getInfo = (setData, e) => {
-      console.log('input month ', inputMonth, 'input day is ', inputDay, 'day is', day, 'month is', month);
-    // console.log("getInfo called and closed is ", setData);
-    // console.log('inputDetails ', inputDetails, 'inputDay ', inputDay, 'month ', inputMonth, 'day ', day, 'month ', month);
     let data;
     if (setData) {
-        // console.log('setDAta!!!');
       data = {
         details: inputDetails ?? "",
         day: inputDay ?? day,
-        month: inputMonth ?? month,
+        month: inputMonth ? inputMonth : month,
         year: year,
       };
       saveAppointment(data);
     } else {
-        // console.log('unsetData!!');
         data = {
           details: "",
           day: day,
@@ -52,7 +47,6 @@ const DayCellModal = ({
     setInputDay(null);
     setInputMonth(null);
     closeModal();
-    console.log(data);
   };
 
   const auxCloseModal = (e) => {
@@ -63,7 +57,8 @@ const DayCellModal = ({
   };
 
   useEffect(() => {
-  }, [inputMonth, inputDay, inputDetails]);
+    setInputMonth(month);
+  }, [month]);
 
   return (
     <Modal
@@ -73,7 +68,6 @@ const DayCellModal = ({
       contentLabel="Example Modal"
       ariaHideApp={false}
     >
-      {console.log("render")}
       {day ? (
         <div>
           <Button onClick={auxCloseModal} size="xs" id="modal-close-btn">
@@ -105,14 +99,13 @@ const DayCellModal = ({
               <Form.Label>Month</Form.Label>
               <Form.Control
                 as="select"
-                onChange={
-                  ((e) => setInputMonth(e.target.value),
-                  (e) => console.log(e.target.value))
+                onClick={
+                  (e) => setInputMonth(e.target.value)
                 }
                 defaultValue={month}
               >
                 {monthNames.map((item) => {
-                  return <option key={item.index}>{item.month}</option>;
+                  return <option value={item.month} key={item.index}>{item.month}</option>;
                 })}
               </Form.Control>
             </Form.Group>

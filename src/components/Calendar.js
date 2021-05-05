@@ -120,10 +120,10 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    setMonth({
+    setMonth(month => ({
       ...month,
       name: filterMonthNames(month.value),
-    });
+    }));
   }, []);
 
   useEffect(() => {

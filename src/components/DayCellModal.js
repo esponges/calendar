@@ -26,7 +26,7 @@ const DayCellModal = ({
   const [inputMonth, setInputMonth] = useState(null);
   const { day, month, year } = dayCellData;
 
-  const getInfo = (setData, e) => {
+  const getInfo = (setData) => {
     let data;
     if (setData) {
       data = {
@@ -49,7 +49,7 @@ const DayCellModal = ({
     closeModal();
   };
 
-  const auxCloseModal = (e) => {
+  const auxCloseModal = () => {
     getInfo(false);
     setInputDetails(null);
     setInputMonth(null);
@@ -70,7 +70,7 @@ const DayCellModal = ({
     >
       {day ? (
         <div>
-          <Button onClick={auxCloseModal} size="xs" id="modal-close-btn">
+          <Button onClick={() => auxCloseModal} size="xs" id="modal-close-btn">
             x
           </Button>
           <h2>New appointment</h2>
@@ -112,12 +112,12 @@ const DayCellModal = ({
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>{year}</Form.Label>
             </Form.Group>
-            <Button onClick={(e) => getInfo(true, e)}>Create</Button>
+            <Button onClick={() => getInfo(true)}>Create</Button>
           </Form>
         </div>
       ) : (
         <div>
-          <Button onClick={auxCloseModal} size="xs" id="modal-close-btn">
+          <Button onClick={() => auxCloseModal} size="xs" id="modal-close-btn">
             x
           </Button>
           <h4>Please choose a day from the actual month</h4>

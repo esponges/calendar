@@ -21,8 +21,8 @@ const TableBody = ({ displayData }) => {
           displayData.map((week, i) => {
             return (
               <tr key={uuidv4()}>
-                {week.map((days, i) => {
-                  return <DayCell key={uuidv4()} dayData={days} />;
+                {week.map((d) => {
+                  return <DayCell key={d.id} dayData={d} />;
                 })}
               </tr>
             );

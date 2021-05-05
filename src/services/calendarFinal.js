@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 const getCalendar = (day, month, year) => {
   const lastMonthDays = getLastMonth(month, year);
   const actualMonthDays = getActualMonth(month, year);
@@ -46,6 +48,7 @@ const chunkByWeek = (calendar) => {
       return {
         day: key,
         actualMonth: value,
+        id: uuid.v4(),
       };
     });
     chunkedCalendar.push(slicedObj);
